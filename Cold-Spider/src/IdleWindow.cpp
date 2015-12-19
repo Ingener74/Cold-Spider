@@ -19,5 +19,5 @@ IdleWindow::~IdleWindow() {
 
 void IdleWindow::onButton() {
     if (_context)
-        _context->start();
+        _context->start(Login(loginLineEdit->text().toStdString()));
 }

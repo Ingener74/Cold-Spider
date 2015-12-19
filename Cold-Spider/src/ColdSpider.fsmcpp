@@ -3,31 +3,36 @@
     <settings asynchronous="false" library="std">
         <object instance="workerView" class="WorkWindow" include="WorkWindow.h"/>
         <object instance="idleView" class="IdleWindow" include="IdleWindow.h"/>
+        <include>Login.h</include>
     </settings>
     <!-- Events -->
     <events>
         <eventSource name="MainEvent">
-            <event id="start" name="start"/>
+            <event id="init" name="init"/>
+            <event id="start" name="start">
+                <parameter name="login" type="Login_cr"/>
+            </event>
             <event id="stop" name="stop"/>
         </eventSource>
     </events>
     <!-- States -->
     <state name="StateMachine">
+        <transition event="init" nextState="Idle"/>
         <state name="Idle">
             <onEntry>
-                <action>idleView.show();</action>
+                <action>idleView.show()</action>
             </onEntry>
             <onExit>
-                <action>idleView.hide();</action>
+                <action>idleView.hide()</action>
             </onExit>
-            <transition event="start" nextState="Working"/>
+            <transition event="start" nextState="Working" condition="login == TestLogin"/>
         </state>
         <state name="Working">
             <onEntry>
-                <action>workerView.show();</action>
+                <action>workerView.show()</action>
             </onEntry>
             <onExit>
-                <action>workerView.hide();</action>
+                <action>workerView.hide()</action>
             </onExit>
             <transition event="stop" nextState="Idle"/>
         </state>

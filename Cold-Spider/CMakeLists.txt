@@ -31,6 +31,9 @@ set(ColdSpider_SOURCES
     
     src/IdleWindow.h
     src/IdleWindow.cpp
+    
+    src/Login.h
+    src/Login.cpp
 )
 
 include_directories(

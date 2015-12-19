@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
         idle._context = &context;
         work._context = &context;
 
-        context.start();
+        context.init();
 
         return app.exec();
 

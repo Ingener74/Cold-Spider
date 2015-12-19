@@ -28,6 +28,9 @@
        </widget>
       </item>
       <item>
+       <widget class="QLineEdit" name="loginLineEdit"/>
+      </item>
+      <item>
        <widget class="QPushButton" name="pushButton">
         <property name="text">
          <string>Work</string>
