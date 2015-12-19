@@ -9,11 +9,11 @@ include_directories(
     ${Qt5Core_INCLUDE_DIRS}
 )
 
-qt5_add_resources(COLD_SPIDER_RESOURCES
+qt5_add_resources(ColdSpider_RESOURCES
     src/resources.qrc
 )
 
-qt5_wrap_ui(COLD_SPIDER_UIS 
+qt5_wrap_ui(ColdSpider_UIs 
     src/idle.ui
     src/work.ui
 )
@@ -21,18 +21,14 @@ qt5_wrap_ui(COLD_SPIDER_UIS
 find_package(STATEBUILDERCPP REQUIRED)
 include(UseStateBuilderCpp)
 
-statebuildercpp_compile(COLD_SPIDER_FSM src/ColdSpider.fsmcpp)
+statebuildercpp_compile(ColdSpider_Fsm 
+    src/ColdSpider.fsmcpp
+)
 
 set(ColdSpider_SOURCES
     src/main.cpp
-    
-    src/WorkWindow.h
     src/WorkWindow.cpp
-    
-    src/IdleWindow.h
     src/IdleWindow.cpp
-    
-    src/Login.h
     src/Login.cpp
 )
 
@@ -42,7 +38,12 @@ include_directories(
 )
 
 add_definitions(-fPIC -std=c++11)
-add_executable(Cold-Spider ${ColdSpider_SOURCES} ${COLD_SPIDER_RESOURCES} ${COLD_SPIDER_UIS} ${COLD_SPIDER_FSM})
+add_executable(Cold-Spider 
+    ${ColdSpider_SOURCES} 
+    ${ColdSpider_RESOURCES} 
+    ${ColdSpider_UIs} 
+    ${ColdSpider_Fsm}
+)
 target_link_libraries(Cold-Spider 
     Qt5::Core 
     Qt5::Widgets
