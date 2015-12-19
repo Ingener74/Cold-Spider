@@ -1,0 +1,35 @@
+<sm:StateMachine xmlns:sm="http://www.stateforge.com/StateMachineCpp-v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.stateforge.com/StateMachineCpp-v1                                      http://www.stateforge.com/xsd/StateMachineCpp-v1.xsd">
+    <!-- General settings -->
+    <settings asynchronous="false" library="std">
+        <object instance="workerView" class="WorkWindow" include="WorkWindow.h"/>
+        <object instance="idleView" class="IdleWindow" include="IdleWindow.h"/>
+    </settings>
+    <!-- Events -->
+    <events>
+        <eventSource name="MainEvent">
+            <event id="start" name="start"/>
+            <event id="stop" name="stop"/>
+        </eventSource>
+    </events>
+    <!-- States -->
+    <state name="StateMachine">
+        <state name="Idle">
+            <onEntry>
+                <action>idleView.show();</action>
+            </onEntry>
+            <onExit>
+                <action>idleView.hide();</action>
+            </onExit>
+            <transition event="start" nextState="Working"/>
+        </state>
+        <state name="Working">
+            <onEntry>
+                <action>workerView.show();</action>
+            </onEntry>
+            <onExit>
+                <action>workerView.hide();</action>
+            </onExit>
+            <transition event="stop" nextState="Idle"/>
+        </state>
+    </state>
+</sm:StateMachine>
