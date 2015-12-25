@@ -11,12 +11,16 @@
 #include <QtWidgets/qwidget.h>
 #include "ui_idle.h"
 
+#include "Login.h"
+
 class IdleWindow: public QWidget, public Ui_IdleForm {
 public:
     IdleWindow(QWidget* parent = 0, Qt::WindowFlags f = 0);
     virtual ~IdleWindow();
 
     void onButton();
+
+    void loginAction(Login_cr login);
 
     class ColdSpiderContext* _context;
 };

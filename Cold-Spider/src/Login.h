@@ -9,6 +9,7 @@
 #define COLD_SPIDER_SRC_LOGIN_H_
 
 #include <string>
+#include <iostream>
 
 class Login {
 public:
@@ -16,6 +17,8 @@ public:
     virtual ~Login();
 
     bool operator==(const Login&) const;
+
+    friend std::ostream& operator<<(std::ostream&, const Login&);
 
     std::string _login;
 };

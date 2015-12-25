@@ -8,6 +8,11 @@
     <!-- Events -->
     <events>
         <eventSource name="MainEvent">
+            <event id="doWork2" name="doWork2">
+                <parameter name="login" type="Login_cr"/>
+            </event>
+            <event id="doWork" name="doWork"/>
+            <event id="secondStage" name="secondStage"/>
             <event id="init" name="init"/>
             <event id="start" name="start">
                 <parameter name="login" type="Login_cr"/>
@@ -25,7 +30,9 @@
             <onExit>
                 <action>idleView.hide()</action>
             </onExit>
-            <transition event="start" nextState="Working" condition="login == TestLogin"/>
+            <transition event="start" nextState="FirstStage" condition="login == TestLogin">
+                <action>idleView.loginAction(login)</action>
+            </transition>
         </state>
         <state name="Working">
             <onEntry>
@@ -34,7 +41,24 @@
             <onExit>
                 <action>workerView.hide()</action>
             </onExit>
-            <transition event="stop" nextState="Idle"/>
+            <state name="FirstStage">
+                <onEntry>
+                    <action>workerView.firstStage()</action>
+                </onEntry>
+                <transition event="stop" nextState="SecondStage"/>
+                <transition event="doWork" nextState="FirstStage">
+                    <action>workerView.doWork()</action>
+                </transition>
+                <transition event="doWork2" nextState="FirstStage">
+                    <action>workerView.doWork2(login)</action>
+                </transition>
+            </state>
+            <state name="SecondStage">
+                <onEntry>
+                    <action>workerView.secondStage()</action>
+                </onEntry>
+                <transition event="stop" nextState="Idle"/>
+            </state>
         </state>
     </state>
 </sm:StateMachine>

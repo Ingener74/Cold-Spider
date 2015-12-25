@@ -19,3 +19,7 @@ Login::~Login() {
 bool Login::operator ==(const Login& r) const {
     return _login == r._login;
 }
+
+ostream& operator<<(ostream& out, const Login& r) {
+    return out << r._login;
+}

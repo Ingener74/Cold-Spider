@@ -17,6 +17,14 @@ public:
     virtual ~WorkWindow();
 
     void onButton();
+    void onDoWorkButton();
+    void onDoWorkButton2();
+
+    void firstStage();
+    void secondStage();
+
+    void doWork();
+    void doWork2(Login_cr);
 
     ColdSpiderContext* _context;
 };
